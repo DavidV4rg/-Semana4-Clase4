@@ -1,2 +1,2 @@
-# ClaseMeotodos
+# ClaseMetodos
 Mi primer repositorio
