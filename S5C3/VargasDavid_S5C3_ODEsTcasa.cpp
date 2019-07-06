@@ -22,11 +22,11 @@ double dxdt(float t, float x, float v)
 }
 int main()
 {
-    int puntos = 1000;
+    int puntos = 100000;
     float t[puntos];
     float x[puntos];
     float v[puntos];
-    float dt = 0.1;
+    double dt = 0.01;
     
     t[0] = 0.0;
     x[0] = 0.1;
