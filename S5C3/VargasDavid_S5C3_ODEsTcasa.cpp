@@ -4,19 +4,19 @@
 
 using namespace std;
 //Se declaran primero los metodos que usaré para hallar las derivadas
-double dxdt(float t, float x, float v);
-double dvdt(float t, float x, float v);
+double dxdt(float t_in, float x_in, float v_in);
+double dvdt(float t_in, float x_in, float v_in);
 
 //Se crea el método que va a calcular la derivada de la velocidad con respecto al tiempo
-double dvdt(float t, float x, float v)
+double dvdt(float t_in, float x_in, float v_in)
 {
     int k, masa;
-    k = 2;
-    masa = 300;
-    return -k*x/masa;
+    k = 300;
+    masa = 2;
+    return -(k*x_in)/masa;
 }
 //Se crea el método que va a calcular la derivada de la posición con respecto al tiempo
-double dxdt(float t, float x, float v)
+double dxdt(float t_in, float x_in, float v_in)
 {
     return v;
 }
