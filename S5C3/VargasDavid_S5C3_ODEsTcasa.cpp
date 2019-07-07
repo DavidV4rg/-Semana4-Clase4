@@ -3,11 +3,11 @@
 #include <fstream>
 
 using namespace std;
-
+//Se declaran primero los metodos que usaré para hallar las derivadas
 double dxdt(float t, float x, float v);
 double dvdt(float t, float x, float v);
 
-
+//Se crea el método que va a calcular la derivada de la velocidad con respecto al tiempo
 double dvdt(float t, float x, float v)
 {
     int k, masa;
@@ -15,27 +15,37 @@ double dvdt(float t, float x, float v)
     masa = 300;
     return -k*x/masa;
 }
-
+//Se crea el método que va a calcular la derivada de la posición con respecto al tiempo
 double dxdt(float t, float x, float v)
 {
     return v;
 }
+
+//Dentro del main hago el metodo de runge kutta
 int main()
 {
+    //tiempo inicial
     int t0 = 0;
+    //tiempo final
     int tf = 5; 
+    //delta de tiempo para hallar la derivada
     double dt = 0.001;
+    //Número de puntos que se usarán para poder hallar las derivadas
     int puntos = (tf-t0)/dt;
+    //Arreglos del tiempo, posición y velocidad
     float t[puntos];
     float x[puntos];
-    float v[puntos];    
+    float v[puntos];
+    //se declaran las condiciones inicales para que Runge Kutta pueda funcionar
     t[0] = 0.0;
     x[0] = 0.1;
-    v[0] = 0.0;   
+    v[0] = 0.0;
+    //Variables que se usarán para hallar las derivadas en cada ciclo.
     float mean1, mean2;
     float kx1, kx2, kx3, kx4;
     float kv1, kv2, kv3, kv4;
     
+    //Bucle que va a calcular las derivadas 
     for (int i = 1; i<=(puntos-1); i++)
     {
         kx1 = dt*dxdt(t[i-1], x[i-1], v[i-1]);
