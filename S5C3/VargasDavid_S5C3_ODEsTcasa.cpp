@@ -1,5 +1,4 @@
 #include <iostream>
-#include <math.h> 
 #include <fstream>
 
 using namespace std;
@@ -24,12 +23,13 @@ double dxdt(float t_in, float x_in, float v_in)
 //Dentro del main hago el metodo de runge kutta
 int main()
 {
+
     //tiempo inicial
-    int t0 = 0;
+    double t0 = 0;
     //tiempo final
-    int tf = 5; 
+    double tf = 5.0006; 
     //delta de tiempo para hallar la derivada
-    double dt = 0.001;
+    double dt = 0.0001;
     //Número de puntos que se usarán para poder hallar las derivadas
     int puntos = (tf-t0)/dt;
     //Arreglos del tiempo, posición y velocidad
@@ -45,8 +45,10 @@ int main()
     float kx1, kx2, kx3, kx4;
     float kv1, kv2, kv3, kv4;
     
+    ofstream outfile;
+    outfile.open("data.dat");
     //Bucle que va a calcular las derivadas 
-    for (int i = 1; i<=(puntos-1); i++)
+    for (int i = 1; i<= puntos; i++)
     {
         kx1 = dt*dxdt(t[i-1], x[i-1], v[i-1]);
         kv1 = dt*dvdt(t[i-1], x[i-1], v[i-1]);
@@ -67,9 +69,14 @@ int main()
         x[i]= x[i-1]+mean1;
         v[i]= v[i-1]+mean2;
         
-        cout << t[i-1] << ";" << x[i-1] << ";" << v[i-1] << endl;         
+        outfile << t[i-1] << ";" << x[i-1] << ";" << v[i-1] << endl;
+        cout << "En el tiempo " << t[i-1] << " la posición es: " << x[i-1] << " y la velocidad es: " << v[i-1] << endl;
      
-    }    
+    } 
+    
+    
+    outfile.close();
+
     return 0;
     
 }
