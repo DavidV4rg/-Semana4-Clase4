@@ -18,7 +18,7 @@ double dvdt(float t_in, float x_in, float v_in)
 //Se crea el método que va a calcular la derivada de la posición con respecto al tiempo
 double dxdt(float t_in, float x_in, float v_in)
 {
-    return v;
+    return v_in;
 }
 
 //Dentro del main hago el metodo de runge kutta
