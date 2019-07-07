@@ -12,7 +12,7 @@ double dvdt(float t, float x, float v)
 {
     int k, masa;
     k = 2;
-    masa = 200;
+    masa = 300;
     return -k*x/masa;
 }
 
@@ -22,21 +22,21 @@ double dxdt(float t, float x, float v)
 }
 int main()
 {
-    int puntos = 100000;
+    int t0 = 0;
+    int tf = 5; 
+    double dt = 0.001;
+    int puntos = (tf-t0)/dt;
     float t[puntos];
     float x[puntos];
-    float v[puntos];
-    double dt = 0.01;
-    
+    float v[puntos];    
     t[0] = 0.0;
     x[0] = 0.1;
-    v[0] = 0.0;
-    
+    v[0] = 0.0;   
     float mean1, mean2;
     float kx1, kx2, kx3, kx4;
     float kv1, kv2, kv3, kv4;
     
-    for (int i = 1; i<=puntos; i++)
+    for (int i = 1; i<=(puntos-1); i++)
     {
         kx1 = dt*dxdt(t[i-1], x[i-1], v[i-1]);
         kv1 = dt*dvdt(t[i-1], x[i-1], v[i-1]);
@@ -56,9 +56,9 @@ int main()
         t[i]= t[i-1]+dt;
         x[i]= x[i-1]+mean1;
         v[i]= v[i-1]+mean2;
-
         
-        cout << t[i-1] << ";" << x[i-1] << ";" << v[i-1] << endl;       
+        cout << t[i-1] << ";" << x[i-1] << ";" << v[i-1] << endl;         
+     
     }    
     return 0;
     
