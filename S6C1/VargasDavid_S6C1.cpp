@@ -7,6 +7,8 @@ int main()
 {
     ofstream outfile;
     outfile.open("datos.dat");
+    int n_x = 80;
+    int n_t = 200;
     float dx = 0.01;
     int v = 1.0;
     float dt = (dx/v)*0.25;
@@ -17,7 +19,8 @@ int main()
     tiempo[n_puntos] = 2.0;
     amp[0]= 1;
     amp[n_puntos] = 1.0;
-    float amp_past[n_puntos];
+    float t[n_puntos];
+    
     
     
     for (int i = 1; i <=n_puntos; i++)
@@ -28,6 +31,7 @@ int main()
         {
             amp[i] = 2.0;
         }
+        t[n_puntos] = tiempo[i-1];
         
         outfile << tiempo[i-1] << ";" <<amp[i-1] << endl;
     }
@@ -35,17 +39,21 @@ int main()
     outfile.close();
     
     outfile.open("datos1.dat");
-    for(int i = 1; i<=n_puntos; i++)
+    for(int n = 0; n<=n_t; n++)
     {
-        amp_past[i] = 1.0;
-        if (tiempo[i]>=0.75 && tiempo[i]<=1.25)
+        float amp_past[n_puntos];
+        amp_past[n] = 1.0;
+        if(tiempo[n] >= 0.75 && tiempo[n]<=1.25)
         {
-            amp_past[i] = 2.0;
+            amp_past[n]=2.0;
         }
-
-        tiempo[i] = tiempo[i-1] + dx;
+                
+        for(int i = 1; i <= n_x -1; i++)
+        {
         amp[i] = amp_past[i] - (v*dt)/dx*(amp_past[i]- amp_past[i-1]);
-        outfile << tiempo[i-1] << ";" <<amp[i-1] << endl;            
+        outfile << t[i-1] << ";" <<amp[i-1] << endl;       
+        }
+        
     }
     outfile.close();
     
