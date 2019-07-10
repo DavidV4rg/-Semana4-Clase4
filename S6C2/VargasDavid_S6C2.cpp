@@ -49,7 +49,7 @@ int main()
     outfile1.open("data1.dat");
     for (int i =1; i<N_puntos; i++)
     {
-        x_fut[i] = x_past[i] + cos*(x_past[i+1]+x_past[i-1]-2*x_past[i]);
+        x_fut[i] = 2*x_past[i] + cos*(x_past[i+1]+x_past[i-1]-2*x_past[i]);
         outfile1 << t[i-1] << ";" << x_fut[i] << endl;
             
     }
