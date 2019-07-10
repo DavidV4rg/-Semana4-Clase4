@@ -23,9 +23,9 @@ int main()
     xpres[0] = 0;
     xfutu[0] = 0;
     double r = pow((c*dt)/dx,2);    
+
     ofstream outfile;
-    outfile.open("data.dat");
-   
+    outfile.open("inicia.dat");
     //Condiciones iniciales
     for (int i = 1; i<N_puntos+1; i++)
     {
@@ -42,39 +42,48 @@ int main()
             x[i] = -(2*A0/l)*t[i] + 2*A0;
             xpast[i] = x[i];
         }
+        outfile << t[i-1] << ";" << xpast[i-1]<<endl;
     }
+    outfile.close();
     //Primer paso
+    
+    ofstream outfile2;
+    outfile2.open("primer.dat");
+        
     for (int i = 0; i <=N_puntos; i++)
     {
         xpres[i] = (r/2)*(xpast[i+1]+xpast[i-1]-2*xpast[i]) + xpast[i]; 
+        outfile2 << xpres[i]<< endl;
     }
+    outfile2.close();
     
     //Siguientes pasos
     int contador = 0;
-    
+    ofstream outfile1;
+    outfile1.open("data.dat");
     for (int i = 0; i<=N_puntos; i++)
     {
-        contador++;
+        contador = contador+1;
         for (int k = 1; k<N_puntos; k++)
         {
-            xfutu[i]= r*(xpres[i+1]+xpres[i-1]-2*xpres[i])-xpast[i]+2*xpres[i];
+            xfutu[k]= r*(xpres[k+1]+xpres[k-1]-2*xpres[k])-xpast[k]+2*xpres[k];
             
             if(contador%100==0)
             {
-                outfile << t[i-1] <<";" << xfutu[i-1] <<endl;
+                outfile << t[k-1] <<";" << xfutu[k-1] <<endl;
             }
+        }
             
             for(int z =1; z<N_puntos; z++)
             {
-                xpast[i] = xpres[i];
-                xpres[i] = xfutu[i];
-            }
+                xpast[z] = xpres[z];
+                xpres[z] = xfutu[z]; 
+            } 
+        
 
-            
-        }
-                    outfile.close();
                
     }
+    outfile1.close();
 
     return 0;
 }
