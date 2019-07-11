@@ -42,44 +42,20 @@ dato1 = np.genfromtxt("libre.dat", delimiter = ";")
 dato2 = np.genfromtxt("data1.dat", delimiter = ";")
 
 tiem = dato1[:,0]
-pos1 = dato1[:,1]
 pos2 = dato1[:,2]
 
 pos3 = dato2[:,0]
 tie = dato2[:,1]
 
+plt.figure()
 
-plt.figure(figsize=(30,15))
-
-plt.subplot(1,4,1)
 plt.plot(tiempo, pos, label="inicial", c="r")
+plt.plot(tiem, pos2, label ="primer paso")
+plt.plot(tie, pos3, label ="siguientes pasos")
 plt.grid()
 plt.xlabel("$Longitud$ $(m)$")
 plt.ylabel("$Amplitud$ $(m)$")
 plt.legend()
-
-plt.subplot(1,4,2)
-plt.plot(tiem, pos1, c="b", label="primer paso")
-plt.grid()
-plt.xlabel("$Longitud$ $(m)$")
-plt.ylabel("$Amplitud$ $(m)$")
-plt.legend()
-
-
-plt.subplot(1,4,3)
-plt.plot(tiem, pos2, label ="segundo paso")
-plt.grid()
-plt.xlabel("$Longitud$ $(m)$")
-plt.ylabel("$Amplitud$ $(m)$")
-plt.legend()
-
-plt.subplot(1,4,4)
-plt.plot(tie, pos3, label ="segundo paso")
-plt.grid()
-plt.xlabel("$Longitud$ $(m)$")
-plt.ylabel("$Amplitud$ $(m)$")
-plt.legend()
-
 
 plt.savefig("libre.pdf")
 
