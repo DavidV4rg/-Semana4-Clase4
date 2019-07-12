@@ -11,14 +11,17 @@ plt.figure(figsize=(15,10))
 plt.subplot(1,3,1)
 plt.imshow(placa)
 plt.title("$Tiempo$ $0s$")
+plt.colorbar()
 
 plt.subplot(1,3,2)
 plt.imshow(placa1)
 plt.title("$Tiempo$ $100s$")
+plt.colorbar()
 
 plt.subplot(1,3,3)
 plt.imshow(placa2)
 plt.title("$Tiempo$ $2500s$")
+plt.colorbar()
 
 
-plt.savefig("placa.pdf")
+plt.savefig("placa")
