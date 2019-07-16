@@ -55,38 +55,36 @@ plt.savefig("circulo.pdf")
 
 a=np.copy(x)
 b=np.copy(y)
+paso1=[]
+paso2=[]
 caminatax = []
 caminatay = []
 
-
-for i in range(0,100):   
-    paso1 = np.random.normal(x[i], 0.25)
-    paso2 = np.random.normal(y[i], 0.25)
-    x+=paso1
-    y+=paso2
-
-    for n in range(0,len(x)):
+for i in range(100):
+    for n in range(len(x)):
+        x[n] = np.random.normal(x[n], 0.25)
+        y[n] = np.random.normal(y[n], 0.25)
+        caminatax.append(x[20])
+        caminatay.append(y[20])
         if x[n] > 30.5:
             x[n] = x[n] - 30.5
-        elif x[i] < 0:
+        elif x[n] < 0:
             x[n]  = x[n] + 30.5
         if y[n] > 30.5:
             y[n] = y[n] - 30.5
         elif y[n] < 0:
             y[n] = y[n] + 30.5
-        caminatax.append(x[15])
-        caminatay.append(y[15])
             
 # Grafique la distribucion final de puntos y guarde dicha grafica sin mostrarla en un archivo llamado DistCaminata.pdf
 plt.figure()
-plt.scatter(x,y, label= "distribución final", alpha = 0.8)
-plt.scatter(a,b, label = "distribución inicial", alpha = 0.4)
+plt.scatter(x,y, label= "$distribución$ $final$", alpha = 0.8, color="g")
+plt.scatter(a,b, label = "$distribución$ $inicial$", alpha = 0.4, color = "y")
 plt.legend()
 plt.savefig("DistCaminata.pdf")
 # Grafique la caminata de UNO de sus puntos y guarde dicha grafica sin mostrarla en un archivo llamado puntoCaminata.pdf
 plt.figure()
 plt.plot(caminatax, caminatay)
-plt.title("caminata para el punto 15")
+plt.title("$Caminata$ $para$ $el$ $punto$ $20$")
 plt.savefig("puntoCaminata.pdf")
 
 # Repita el proceso para sigma = 0.00025 y sigma= 2.5. Grafique la caminata de UNO de sus puntos para los distintos sigmas y guardela sin mostrarla en sigmaCaminata.pdf
@@ -96,20 +94,17 @@ camiy = []
 cx = []
 cy = []
 
-for i in range(100):   
-    pao1 = np.random.normal(x[i], 0.0025)
-    pao2 = np.random.normal(y[i], 0.0025)
-    pa1  = np.random.normal(x[i], 2.5)
-    pa2  = np.random.normal(x[i], 2.5)
-    x+=pao1
-    y+=pao2
-    a+=pa1
-    b+=pa2
-    camix.append(x[15])
-    camiy.append(y[15])
-    cx.append(a[15])
-    cy.append(b[15])
+for i in range(100):  
     for n in range(0,len(x)):
+        x[n] = np.random.normal(x[n], 0.0025)
+        y[n] = np.random.normal(y[n], 0.0025)
+        a[n]  = np.random.normal(x[n], 2.5)
+        b[n]  = np.random.normal(x[n], 2.5)
+        camix.append(x[20])
+        camiy.append(y[20])
+        cx.append(a[20])
+        cy.append(b[20])
+    
         if x[n] > 30.5:
             x[n] = x[n] - 30.5
         elif x[i] < 0:
@@ -127,34 +122,56 @@ for i in range(100):
         elif b[n] < 0:
             b[n] = b[n] + 30.5
             
-plt.figure()
-plt.plot(camix, camiy, label= "$alpha=0.0025$")
-plt.plot(cx,cy, label = "$alpha=2.5$")
+plt.figure(figsize=(10,7))
+plt.subplot(1,2,1)
+plt.title("$Caminata$ $para$ $el$ $punto$ $20$")
 plt.xlabel("$x$")
 plt.ylabel("$y$")
-plt.title("$Caminata$ $para$ $el$ $punto$ $15$")
+plt.plot(camix, camiy, label= "$alpha=0.0025$", c= "m")
+plt.legend()
+plt.subplot(1,2,2)
+plt.title("$Caminata$ $para$ $el$ $punto$ $20$")
+plt.plot(cx,cy, label = "$alpha=2.5$", color = "k")
+plt.xlabel("$x$")
+plt.ylabel("$y$")
 plt.legend()
 plt.savefig("sigmaCaminata.pdf")
 
 
 # Repita el proceso para condiciones abiertas: si un punto se "sale" del cuadrado deja de ser considerado en la simulacion.
-
-
 # Si le queda tiempo puede:
 
 ## Ejercicio  ####
 
 
 #difusion: una gota de crema en un Cafe.
-#
 #Condiciones iniciales:
 #Cafe: 10000 particulas distribuidas uniformemente dentro de un circulo de radio igual a raiz de 230
 #Crema: 100 particulas distribuidas uniformemente dentro de un circulo de radio igual a raiz de 2
-#
+
 #Nota: si su codigo se esta demorando mucho en correr, puede usar 1000 particulas de cafe en vez de 10000.
-#
+
+cafe = np.random.uniform(0,1,10000)*2*np.pi
+radio = (230**0.5)*np.random.uniform(0,1,10000)
+
+x_1 = radio*np.cos(cafe)
+y_1 = radio*np.sin(cafe)
+
+crema=np.random.uniform(0,1,100)*2*np.pi
+radio1 = (2**0.5)*np.random.uniform(0,1,100)
+
+x_2 = radio1*np.cos(crema)
+y_2 = radio1*np.sin(crema)
+
 # 1) Haga una grafica de las condiciones iniciales donde los dos tipos de particulas tengan distintos colores. Guarde dicha grafica sin mostrarla en CafeLecheIni.pdf
-#
+
+plt.figure()
+plt.title("$Café$ $con$ $crema$")
+plt.scatter(x_1,y_1, alpha=0.75, color="sienna", label="$café$")
+plt.scatter(x_2,y_2, alpha=0.45, color="wheat", label="$crema$")
+plt.legend()
+plt.savefig("CafeLecheIni")
+
 #2) Todas las particulas deben hacer una caminata aleatoria de 1000 pasos. Los pasos en las coordenadas x y deben seguir una distribucion gausiana de sigma 2.5. Si va a usar coordenadas polares elija un sigma apropiado.
 #
 #3) Condiciones de frontera: implemente unas condiciones tales que si la particulas "sale" del circulo, usted vuelva a dar el paso. Si no puede implementar solo las condiciones antes descritas, debe al menos escribir comentarios explicando que hace cada linea de codigo de las condiciones propuestas (comentado abajo)
