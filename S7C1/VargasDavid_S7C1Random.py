@@ -64,8 +64,7 @@ for i in range(0,100):
     paso2 = np.random.normal(y[i], 0.25)
     x+=paso1
     y+=paso2
-    caminatax.append(x[15])
-    caminatay.append(y[15])
+
     for n in range(0,len(x)):
         if x[n] > 30.5:
             x[n] = x[n] - 30.5
@@ -75,6 +74,8 @@ for i in range(0,100):
             y[n] = y[n] - 30.5
         elif y[n] < 0:
             y[n] = y[n] + 30.5
+        caminatax.append(x[15])
+        caminatay.append(y[15])
             
 # Grafique la distribucion final de puntos y guarde dicha grafica sin mostrarla en un archivo llamado DistCaminata.pdf
 plt.figure()
@@ -95,7 +96,7 @@ camiy = []
 cx = []
 cy = []
 
-for i in range(0,100):   
+for i in range(100):   
     pao1 = np.random.normal(x[i], 0.0025)
     pao2 = np.random.normal(y[i], 0.0025)
     pa1  = np.random.normal(x[i], 2.5)
@@ -117,20 +118,32 @@ for i in range(0,100):
             y[n] = y[n] - 30.5
         elif y[n] < 0:
             y[n] = y[n] + 30.5
+        if a[n] > 30.5:
+            a[n] = a[n] - 30.5
+        elif a[i] < 0:
+            a[n]  = a[n] + 30.5
+        if b[n] > 30.5:
+            b[n] = b[n] - 30.5
+        elif b[n] < 0:
+            b[n] = b[n] + 30.5
+            
 plt.figure()
-plt.scatter(x,y, label= "distribución final")
-plt.scatter(a,b, label = "distribución inicial")
+plt.plot(camix, camiy, label= "$alpha=0.0025$")
+plt.plot(cx,cy, label = "$alpha=2.5$")
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Caminata$ $para$ $el$ $punto$ $15$")
 plt.legend()
-
+plt.savefig("sigmaCaminata.pdf")
 
 
 # Repita el proceso para condiciones abiertas: si un punto se "sale" del cuadrado deja de ser considerado en la simulacion.
 
+
 # Si le queda tiempo puede:
 
-##################################################################################################################################################################
-############################################################ Ejercicio  ##########################################################################
-##################################################################################################################################################################
+## Ejercicio  ####
+
 
 #difusion: una gota de crema en un Cafe.
 #
