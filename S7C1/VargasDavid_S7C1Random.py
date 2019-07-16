@@ -170,18 +170,50 @@ plt.title("$Café$ $con$ $crema$")
 plt.scatter(x_1,y_1, alpha=0.75, color="sienna", label="$café$")
 plt.scatter(x_2,y_2, alpha=0.45, color="wheat", label="$crema$")
 plt.legend()
-plt.savefig("CafeLecheIni")
+plt.savefig("CafeLecheIni.pdf")
 
 #2) Todas las particulas deben hacer una caminata aleatoria de 1000 pasos. Los pasos en las coordenadas x y deben seguir una distribucion gausiana de sigma 2.5. Si va a usar coordenadas polares elija un sigma apropiado.
 #
+
+x_11=np.copy(x_1)
+y_11=np.copy(y_1)
+x_21=np.copy(x_2)
+y_21=np.copy(y_2)
+
+radius = 230**0.5
+for i in range(1000):
+    for n in range(len(x_1)):
+        for p in range(len(x_1)):
+            x_11[n] = np.random.normal(x_11[n], 2.5)
+            y_11[n] = np.random.normal(y_11[n], 2.5)
+
+            if x_11[n] > radius:
+                x_11[n] = np.random.normal(x_11[p], 2.5)
+            if y_11[n] > radius:
+                y_11[n] = np.random.normal(y_11[p], 2.5)
+
+for i in range(1000):            
+    for m in range(len(x_2)):
+        for t in range(len(x_2)):
+            x_21[m] = np.random.normal(x_21[m], 2.5)
+            y_21[m] = np.random.normal(y_21[m], 2.5)
+
+            if x_21[m] > radius:
+                x_21[m] = np.random.normal(x_21[t], 2.5)
+            if y_21[n] > radius:
+                y_21[m] = np.random.normal(y_21[t], 2.5)
+            
+plt.figure()
+plt.scatter(x_1,y_1, alpha=0.75, color="sienna", label="$café$")
+plt.scatter(x_2,y_2, alpha=0.45, color="wheat", label="$crema$")
+plt.scatter(x_11,y_11, alpha=0.7, color="peru", label="$café$ $caminata$")
+plt.scatter(x_21,y_21, alpha=0.5, color="lightyellow", label="$crema$ $caminata$")
+        
+        
 #3) Condiciones de frontera: implemente unas condiciones tales que si la particulas "sale" del circulo, usted vuelva a dar el paso. Si no puede implementar solo las condiciones antes descritas, debe al menos escribir comentarios explicando que hace cada linea de codigo de las condiciones propuestas (comentado abajo)
 #
 # 4) Haga una grafica de las posiciones finales de las particulas despues de la caminata donde los dos tipos de particulas tengan distintos colores. Guarde dicha grafica sin mostrarla en CafeLecheFin.pdf
 #
-
-import numpy as np
-import matplotlib.pylab as plt
-
 
 #Una posible implementacion de condiciones de frontera. Trate de hacer la suya propia sin usar esta. 
 #Si usa esta (obtiene menos puntos) debe comentar cada una de las lineas explicando en palabras que hace el codigo. Debe tambien naturalmente usar los nombres de variables que uso en el resto de su codigo propio.
