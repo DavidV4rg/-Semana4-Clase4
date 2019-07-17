@@ -174,7 +174,7 @@ plt.savefig("CafeLecheIni.pdf")
 
 #2) Todas las particulas deben hacer una caminata aleatoria de 1000 pasos. Los pasos en las coordenadas x y deben seguir una distribucion gausiana de sigma 2.5. Si va a usar coordenadas polares elija un sigma apropiado.
 #
-
+"""
 x_11=np.copy(x_1)
 y_11=np.copy(y_1)
 x_21=np.copy(x_2)
@@ -208,7 +208,7 @@ plt.scatter(x_1,y_1, alpha=0.75, color="sienna", label="$café$")
 plt.scatter(x_2,y_2, alpha=0.45, color="wheat", label="$crema$")
 plt.scatter(x_11,y_11, alpha=0.7, color="peru", label="$café$ $caminata$")
 plt.scatter(x_21,y_21, alpha=0.5, color="lightyellow", label="$crema$ $caminata$")
-        
+"""      
         
 #3) Condiciones de frontera: implemente unas condiciones tales que si la particulas "sale" del circulo, usted vuelva a dar el paso. Si no puede implementar solo las condiciones antes descritas, debe al menos escribir comentarios explicando que hace cada linea de codigo de las condiciones propuestas (comentado abajo)
 #
