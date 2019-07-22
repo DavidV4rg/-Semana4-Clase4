@@ -19,16 +19,21 @@ plt.plot(x[0:-1], segunda)
 plt.savefig("segunda")
 
 
-
-
-
 # Ejercicio 2
 # Complete el siguiente codigo para recorrer la lista `x` e imprima
 # los numeros impares mayores que 100 y que pare de imprimir al encontrar un numero primo.
 x = np.int_(np.random.random(100)*10000)
-
-
-    
+lista = []
+primos = []
+for i in range(len(x)):
+    if (x[i]%2 != 0 and x[i]>100):
+        lista.append(x[i])
+for i in range(len(lista)):
+    for j in range(1, i):
+        if (lista[i]%j == 0):
+            primos.append(lista[i])          
+            
+            
 #Ejercicio 3
 # 'y' es una senal en funcion del tiempo 't' con las unidades descritas en el codigo.
 # a. Grafique la senal en funcion del tiempo en la figura 'senal.png' ('y' vs. 't')
@@ -43,6 +48,53 @@ t = np.linspace( 0, (n-1)*dt, n)
 y = np.sin(2 * np.pi * f * t) + np.cos(2 * np.pi * f * t * t)
 noise = 1.4*(np.random.rand(n)+0.7)
 y  =  y + noise
+
+plt.figure()
+plt.plot(t, y)
+
+def TF(señal):
+    lista = []
+    N = len(señal)
+    for i in range (N):
+        v = 0;
+        for k in range(N):
+            v += señal[k]*np.exp(-2j*np.pi*k*i*(1/N))
+        lista.append(v)
+    return lista
+
+transfo = TF(y)
+N = len(y)
+delta = t[1]-t[0]
+N_delta = N*delta
+
+x1 =  np.linspace(0, (N/2)-1, N/2)
+x2 = np.linspace(-(N/2), -1, N/2)
+
+frecuencias = np.concatenate((x1,x2), axis= None)
+
+plt.figure()
+plt.plot(frecuencias,transfo)
+
+tra = np.copy(transfo)
+
+for i in range(len(frecuencias)):
+    if(frecuencias[i] > 10000):
+        tra[i] = 0
+
+def ITF(señal):
+    lista = []
+    N = len(señal)
+    for i in range (N):
+        v = 0;
+        for k in range(N):
+            v += señal[k]*np.exp(2j*np.pi*k*i*(1/N))
+        lista.append(v)
+    return lista
+
+inversa = ITF(tra)
+
+plt.figure()
+plt.plot(t, inversa)
 
 # Ejercicio 4
 # Resuelva el siguiente sistema acoplado de ecuaciones diferenciales 
