@@ -29,10 +29,10 @@ inversa_filtrada = np.fft.ifft(copia)
 # SU GRAFICA
 
 plt.figure()
-plt.plot(t,amp, color="blue", label="original")
-plt.plot(t, inversa_filtrada, color="red", label = "Filtrada")
+plt.plot(t,amp, color="blue", label="$Original$")
+plt.plot(t, np.real(inversa_filtrada), color="red", label = "$Filtrada$")
 plt.legend()
-pl.savefig("filtro.pdf")
+plt.savefig("filtro.pdf")
 
 
 # Puede usar los siguientes paquetes:
