@@ -1,3 +1,2 @@
 filtro.pdf: VargasDavid_Fourier.py
-    python VargasDavid_Fourier.py
-    
+	python VargasDavid_Fourier.py
